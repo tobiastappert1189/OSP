@@ -1,0 +1,16 @@
+Server/Database/ConnectionManager.java
+ Server.Database.ConnectionManager
+utils/FileUtil.java
+ utils.FileUtil
+Server/Resource/UserResource.java
+ Server.Resource.UserResource
+utils/sex.java
+ utils.sex
+Server/Pojo/User.java
+ Server.Pojo.User
+Server/Repository/UserRepository.java
+ Server.Repository.UserRepository
+HelloWorld.java
+ HelloWorld
+MyApplication.java
+ MyApplication
