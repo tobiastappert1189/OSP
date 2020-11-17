@@ -21,13 +21,16 @@ public class User {
     boolean isManager;
     sex sex;
 
-    public User(String userName, String mail, String password, boolean isManager, utils.sex sex, int id) {
+    public User(String userName, String mail, String password, boolean isManager, int id) {
         this.userName = userName;
         this.mail = mail;
         this.password = password;
         this.isManager = isManager;
-        this.sex = sex;
         this.id = id;
+    }
+
+    public User(){
+
     }
 
     public String getUserName() { return userName; }
