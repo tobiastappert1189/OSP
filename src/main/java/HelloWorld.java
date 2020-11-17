@@ -13,7 +13,7 @@ public class HelloWorld {
     public String getClichedMessage() {
 
         ConnectionManager connectionManager = new ConnectionManager();
-        connectionManager.getConnection();
+        ConnectionManager.getConnection();
         System.out.println("ready");
         return "Hello, World!";
     }

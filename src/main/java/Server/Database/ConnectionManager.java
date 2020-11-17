@@ -3,13 +3,12 @@ import static utils.FileUtil.readFile;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 
 public class ConnectionManager {
-    String initialFill;
+    static String initialFill;
     static final String driverName = "com.mysql.jdbc.Driver";
     private static String username = "root";
     private static String password = "root";
@@ -18,11 +17,13 @@ public class ConnectionManager {
 
 
     public static Connection getConnection() {
-
+        initialFill = readFile("sql/initialFill.sql");
         try {
             Class.forName(driverName);
             try {
                 con = DriverManager.getConnection(urlstring, username, password);
+                update(initialFill);
+                commit();
             } catch (SQLException ex) {
                 // log an exception. fro example:
                 System.out.println("Failed to create the database connection.");
@@ -31,6 +32,7 @@ public class ConnectionManager {
             // log an exception. for example:
             System.out.println("Driver not found.");
         }
+
         return con;
     }
 
@@ -38,6 +40,21 @@ public class ConnectionManager {
         return con != null;
     }
 
+
+    public static void update(String query, Object... parameters) throws SQLException {
+        try (PreparedStatement ps = prepareStatement(query, parameters)) {
+            ps.executeUpdate();
+        }
+    }
+
+    public static PreparedStatement prepareStatement(String query,
+            Object... parameters) throws SQLException {
+        PreparedStatement ps = con.prepareStatement(query);
+        for (int i = 0; i < parameters.length; i++) {
+            ps.setObject(i + 1, parameters[i]);
+        }
+        return ps;
+    }
 
  public void destroy() {
         try {
@@ -48,7 +65,7 @@ public class ConnectionManager {
             //log.error("Unable to close connection: {}", e.getMessage());
         }
     }
-    public void commit() throws SQLException {
+    public static void commit() throws SQLException {
         con.commit();
     }
 
