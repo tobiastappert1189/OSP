@@ -19,6 +19,16 @@ public class HelloWorld {
 
     UserRepositorie userRepositorie = new UserRepositorie();
 
+    @GET
+    @Produces("text/plain")
+    public String getClichedMessagee() {
+
+        ConnectionManager connectionManager = new ConnectionManager();
+        ConnectionManager.getConnection();
+        System.out.println("ready");
+        return "Hello, World!";
+    }
+
     @POST
     @Path("/test")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -32,6 +42,7 @@ public class HelloWorld {
     @Path("/users")
     @Produces(MediaType.APPLICATION_JSON)
     public List<User> getClichedMessage() {
+
         return userRepositorie.getUsers();
     }
 

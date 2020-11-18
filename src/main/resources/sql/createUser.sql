@@ -6,16 +6,3 @@ CREATE TABLE IF NOT EXISTS User (
     isManager boolean,
     PRIMARY KEY (id)
     );
-
-drop table user;
-
-delete from user where id =1;
-
-CREATE TABLE IF NOT EXISTS SEX
-(
-    ID          INT  NOT NULL,
-    DESCRIPTION TEXT NOT NULL,
-
-    PRIMARY KEY (ID)
-);
-
