@@ -18,14 +18,14 @@ public class ConnectionManager {
 
 
     public static Connection getConnection() {
-        initialFillUser = readFile("sql/createUser.sql");
         initialFillSex = readFile("sql/createSex.sql");
+        initialFillUser = readFile("sql/createUser.sql");
         try {
             Class.forName(driverName);
             try {
                 con = DriverManager.getConnection(urlstring, username, password);
-                update(initialFillUser);
                 update(initialFillSex);
+                update(initialFillUser);
                 commit();
             } catch (SQLException ex) {
                 // log an exception. fro example:

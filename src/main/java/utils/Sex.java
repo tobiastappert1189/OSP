@@ -1,6 +1,6 @@
 package utils;
 
-public enum sex
+public enum Sex
 {
     Male,Female
 }

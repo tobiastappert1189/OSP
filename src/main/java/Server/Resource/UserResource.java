@@ -10,12 +10,12 @@ import java.util.List;
 import Server.Database.ConnectionManager;
 import Server.Pojo.User;
 
-public class UserRepositorie implements Server.Repository.UserRepository
+public class UserResource implements Server.Repository.UserRepository
 {
 
     ConnectionManager con;
 
-    public UserRepositorie()
+    public UserResource()
     {
         ConnectionManager.getConnection();
 
@@ -24,7 +24,7 @@ public class UserRepositorie implements Server.Repository.UserRepository
     @Override
     public User createUser(User user)
     {
-        String sql = "insert into user(userName,mail,password,isManager) values (?,?,?,?)";
+        String sql = "insert into user(userName,mail,password,isManager,sex_id) values (?,?,?,?,?)";
         try
                 
         {
@@ -34,6 +34,7 @@ public class UserRepositorie implements Server.Repository.UserRepository
             st.setString(2, user.getMail());
             st.setString(3, user.getPassword());
             st.setBoolean(4, user.isManager());
+            st.setObject(5, user.getSex());
             st.executeUpdate();
 
             ResultSet resultSet= st.getGeneratedKeys();
@@ -62,6 +63,7 @@ public class UserRepositorie implements Server.Repository.UserRepository
                 user.setMail(rs.getString(3));
                 user.setPassword(rs.getString(4));
                 user.setManager(rs.getBoolean(5));
+                user.setSex(rs.getInt(6));
             }
 
         }
@@ -89,6 +91,7 @@ public class UserRepositorie implements Server.Repository.UserRepository
                 user.setMail(rs.getString(3));
                 user.setPassword(rs.getString(4));
                 user.setManager(rs.getBoolean(5));
+                user.setSex(rs.getInt(6));
 
                 users.add(user);
             }
@@ -105,14 +108,15 @@ public class UserRepositorie implements Server.Repository.UserRepository
     @Override
     public void updateUser(User user)
     {
-        String sql = "update user set userName=?,mail=?,password=?,isManager=? where id=?";
+        String sql = "update user set userName=?,mail=?,password=?,isManager=?,sex=? where id=?";
         try{
             PreparedStatement st = ConnectionManager.getConnection().prepareStatement(sql);
             st.setString(1, user.getUserName());
             st.setString(2, user.getMail());
             st.setString(3, user.getPassword());
             st.setBoolean(4, user.isManager());
-            st.setInt(5, user.getId());
+            st.setInt(5,user.getSex());
+            st.setInt(6, user.getId());
             st.executeUpdate();
         }
         catch (SQLException throwables)

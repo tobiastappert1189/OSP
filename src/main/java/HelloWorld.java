@@ -12,12 +12,12 @@ import javax.ws.rs.core.MediaType;
 
 import Server.Database.ConnectionManager;
 import Server.Pojo.User;
-import Server.Resource.UserRepositorie;
+import Server.Resource.UserResource;
 
 @Path("/hello-world")
 public class HelloWorld {
 
-    UserRepositorie userRepositorie = new UserRepositorie();
+    UserResource userResource = new UserResource();
 
     @GET
     @Produces("text/plain")
@@ -33,7 +33,7 @@ public class HelloWorld {
     @Path("/test")
     @Consumes(MediaType.APPLICATION_JSON)
     public String getClichedMessage(User user) {
-        userRepositorie.createUser(user);
+        userResource.createUser(user);
         System.out.println("ready");
         return "Hello, World!";
     }
@@ -43,30 +43,30 @@ public class HelloWorld {
     @Produces(MediaType.APPLICATION_JSON)
     public List<User> getClichedMessage() {
 
-        return userRepositorie.getUsers();
+        return userResource.getUsers();
     }
 
     @GET
     @Path("/users/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public User getClichedMessage(@PathParam("id") int id) {
-        return userRepositorie.getUser(id);
+        return userResource.getUser(id);
     }
 
     @PUT
     @Path("/update")
     @Consumes(MediaType.APPLICATION_JSON)
     public void updateUser(User user) {
-        userRepositorie.updateUser(user);
+        userResource.updateUser(user);
     }
 
     @DELETE
     @Path("/delete/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     public void deleteUser(@PathParam("id") int id) {
-        User user = userRepositorie.getUser(id);
+        User user = userResource.getUser(id);
         if(user.getId()!= 0){
-            userRepositorie.deleteUser(id);
+            userResource.deleteUser(id);
         }
     }
 }

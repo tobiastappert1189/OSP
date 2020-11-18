@@ -1,6 +1,6 @@
 package Server.Pojo;
 
-import utils.sex;
+import utils.Sex;
 
 public class User {
 
@@ -19,14 +19,15 @@ public class User {
     String mail;
     String password;
     boolean isManager;
-    sex sex;
+    int sex;
 
-    public User(String userName, String mail, String password, boolean isManager, int id) {
+    public User(String userName, String mail, String password, boolean isManager, int id,int sex) {
         this.userName = userName;
         this.mail = mail;
         this.password = password;
         this.isManager = isManager;
         this.id = id;
+        this.sex = sex;
     }
 
     public User(){
@@ -49,7 +50,7 @@ public class User {
 
     public void setManager(boolean manager) { isManager = manager; }
 
-    public utils.sex getSex() { return sex; }
+    public int getSex() { return sex;}
 
-    public void setSex(utils.sex sex) { this.sex = sex; }
+    public void setSex(int sex) { this.sex = sex; }
 }

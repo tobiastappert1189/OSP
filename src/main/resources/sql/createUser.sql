@@ -4,5 +4,7 @@ CREATE TABLE IF NOT EXISTS User (
     mail varchar(30),
     password varchar(30),
     isManager boolean,
-    PRIMARY KEY (id)
+    sex_id int,
+    PRIMARY KEY (id),
+    FOREIGN KEY  (sex_id) REFERENCES  sex(sex_id)
     );
