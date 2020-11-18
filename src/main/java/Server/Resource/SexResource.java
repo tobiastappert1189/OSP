@@ -44,6 +44,38 @@ public class SexResource implements Server.Repository.SexRepository
         return sex;
     }
 
+    public int createSexx(Sex sex)
+    {
+
+
+        String sql = "insert into sex(DISCRIPTION) values (?)";
+        int test = 0;
+        int last = 0;
+        try
+        {
+
+            PreparedStatement st = ConnectionManager.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            st.setString(1, sex.getDiscription());
+
+            st.executeUpdate();
+            ResultSet rs = st.getGeneratedKeys();
+            if(rs.next())
+            {
+                last = rs.getInt(1);
+            }
+
+
+
+        }
+
+        catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
+        return last;
+    }
+
 
     @Override
     public Sex getSex(int id)
@@ -58,7 +90,6 @@ public class SexResource implements Server.Repository.SexRepository
             while(rs.next()){
                 sex.setId(rs.getInt(1));
                 sex.setDiscription(rs.getString(2));
-
             }
 
         }
@@ -94,6 +125,28 @@ public class SexResource implements Server.Repository.SexRepository
 
         return sexes;
     }
+
+    public Sex getSexFromDiscription(String DISCRIPTION){
+        String sql = "select * from sex where DISCRIPTION="+DISCRIPTION;
+        Sex sex = new Sex();
+
+        try {
+            Statement st = ConnectionManager.getConnection().createStatement();
+            ResultSet rs = st.executeQuery(sql);
+
+            while(rs.next()){
+                sex.setId(rs.getInt(1));
+                sex.setDiscription(rs.getString(2));
+            }
+
+        }
+        catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
+        return sex;
+    }
+
 
     @Override
     public void updateSex(Sex sex)

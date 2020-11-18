@@ -13,6 +13,7 @@ import javax.ws.rs.core.MediaType;
 import Server.Database.ConnectionManager;
 import Server.Pojo.Sex;
 import Server.Pojo.User;
+import Server.Pojo.UserFromResponse;
 import Server.Resource.SexResource;
 import Server.Resource.UserResource;
 
@@ -114,6 +115,7 @@ public class HelloWorld {
     }
 
 
+
     @POST
     @Path("/sex/create")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -123,9 +125,37 @@ public class HelloWorld {
         return "Hello, World!";
     }
 
-
     */
 
+
+    @POST
+    @Path("/sex/create")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String getClichedMessage(Sex sex) {
+        sexResource.createSex(sex);
+        System.out.println("ready");
+        return "teeest";
+    }
+
+    @POST
+    @Path("/sex/create")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void getClichedMessage(UserFromResponse userFromResponse) {
+        String sexString= userFromResponse.getSexx();
+
+        Sex sex= new Sex();
+        sex.setDiscription(sexString);
+        int sexId = sexResource.createSexx(sex);
+
+        String userName = userFromResponse.getUserName();
+        int id = userFromResponse.getId();
+        String mail = userFromResponse.getMail();
+        String password = userFromResponse.getPassword();
+        boolean isManager = userFromResponse.isManager();
+
+        User user = new User(userName,mail,password,isManager,id,sexId);
+        userResource.createUser(user);
+    }
 
 
 }
