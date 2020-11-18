@@ -1,6 +1,7 @@
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -46,5 +47,15 @@ public class HelloWorld {
     @Consumes(MediaType.APPLICATION_JSON)
     public void updateUser(User user) {
         userRepositorie.updateUser(user);
+    }
+
+    @DELETE
+    @Path("/delete/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void deleteUser(@PathParam("id") int id) {
+        User user = userRepositorie.getUser(id);
+        if(user.getId()!= 0){
+            userRepositorie.deleteUser(id);
+        }
     }
 }

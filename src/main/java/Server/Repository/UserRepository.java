@@ -10,7 +10,9 @@ public interface UserRepository
 
     User getUser(int id);
 
-     public List<User> getUsers();
+     List<User> getUsers();
 
-     public void updateUser(User user);
+     void updateUser(User user);
+
+     void deleteUser(int id);
 }

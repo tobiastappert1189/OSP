@@ -9,6 +9,8 @@ CREATE TABLE IF NOT EXISTS User (
 
 drop table user;
 
+delete from user where id =1;
+
 CREATE TABLE IF NOT EXISTS SEX
 (
     ID          INT  NOT NULL,

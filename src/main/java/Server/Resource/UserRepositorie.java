@@ -7,8 +7,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mysql.cj.protocol.Resultset;
-
 import Server.Database.ConnectionManager;
 import Server.Pojo.User;
 
@@ -32,7 +30,6 @@ public class UserRepositorie implements Server.Repository.UserRepository
         {
             PreparedStatement st = ConnectionManager.getConnection().prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
 
-            // autoincrement id;
             st.setString(1, user.getUserName());
             st.setString(2, user.getMail());
             st.setString(3, user.getPassword());
@@ -124,7 +121,19 @@ public class UserRepositorie implements Server.Repository.UserRepository
         }
     }
 
+    @Override
+    public void deleteUser(int id) {
+        String sql = "delete from user where id="+id;
 
+        try {
+            PreparedStatement st = ConnectionManager.getConnection().prepareStatement(sql);
+            st.executeUpdate();
+        }
+        catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
+    }
 
 
 }
