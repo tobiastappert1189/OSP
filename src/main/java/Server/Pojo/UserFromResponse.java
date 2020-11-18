@@ -19,27 +19,26 @@ public class UserFromResponse
         String mail;
         String password;
         boolean isManager;
-        int sex;
 
         public String getSexx()
         {
-            return sexx;
+            return sex;
         }
 
-        public void setSexx(String sexx)
+        public void setSex(String sexx)
         {
-            this.sexx = sexx;
+            this.sex = sex;
         }
 
-        String sexx;
+        String sex;
 
 
-        public UserFromResponse(int id,String userName, String mail, String password, boolean isManager, String sexx) {
+        public UserFromResponse(int id,String userName, String mail, String password, boolean isManager, String sex) {
             this.userName = userName;
             this.mail = mail;
             this.password = password;
             this.isManager = isManager;
-            this.sexx = sexx;
+            this.sex = sex;
             this.id = id;
         }
 
@@ -63,10 +62,6 @@ public class UserFromResponse
         public boolean isManager() { return isManager; }
 
         public void setManager(boolean manager) { isManager = manager; }
-
-        public int getSex() { return sex;}
-
-        public void setSex(int sex) { this.sex = sex; }
     }
 
 

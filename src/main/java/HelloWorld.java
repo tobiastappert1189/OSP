@@ -14,14 +14,17 @@ import Server.Database.ConnectionManager;
 import Server.Pojo.Sex;
 import Server.Pojo.User;
 import Server.Pojo.UserFromResponse;
+import Server.Pojo.WishedPerson;
 import Server.Resource.SexResource;
 import Server.Resource.UserResource;
+import Server.Resource.WishedPersonResource;
 
 @Path("/hello-world")
 public class HelloWorld {
 
     UserResource userResource = new UserResource();
     SexResource sexResource = new SexResource();
+    WishedPersonResource wishedPersonResource = new WishedPersonResource();
 
 
     /*
@@ -125,7 +128,6 @@ public class HelloWorld {
         return "Hello, World!";
     }
 
-    */
 
 
     @POST
@@ -137,6 +139,8 @@ public class HelloWorld {
         return "teeest";
     }
 
+
+     */
     @POST
     @Path("/sex/create")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -156,6 +160,16 @@ public class HelloWorld {
         User user = new User(userName,mail,password,isManager,id,sexId);
         userResource.createUser(user);
     }
+
+    @POST
+    @Path("/wishedPerson/create")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String getClichedMessage(WishedPerson wishedPerson) {
+        wishedPersonResource.createWishedPerson(wishedPerson);
+        System.out.println("ready");
+        return "teeest";
+    }
+
 
 
 }
