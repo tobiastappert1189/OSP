@@ -24,7 +24,7 @@ public class UserResource implements Server.Repository.UserRepository
     @Override
     public User createUser(User user)
     {
-        String sql = "insert into user(userName,mail,password,isManager,sex_id) values (?,?,?,?,?)";
+        String sql = "insert into user(userName,mail,password,isManager,sex) values (?,?,?,?,?)";
         try
                 
         {
@@ -34,7 +34,7 @@ public class UserResource implements Server.Repository.UserRepository
             st.setString(2, user.getMail());
             st.setString(3, user.getPassword());
             st.setBoolean(4, user.isManager());
-            st.setObject(5, user.getSex());
+            st.setInt(5, user.getSex());
             st.executeUpdate();
 
             ResultSet resultSet= st.getGeneratedKeys();

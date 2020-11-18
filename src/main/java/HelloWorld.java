@@ -11,14 +11,19 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import Server.Database.ConnectionManager;
+import Server.Pojo.Sex;
 import Server.Pojo.User;
+import Server.Resource.SexResource;
 import Server.Resource.UserResource;
 
 @Path("/hello-world")
 public class HelloWorld {
 
     UserResource userResource = new UserResource();
+    SexResource sexResource = new SexResource();
 
+
+    /*
     @GET
     @Produces("text/plain")
     public String getClichedMessagee() {
@@ -29,6 +34,7 @@ public class HelloWorld {
         return "Hello, World!";
     }
 
+
     @POST
     @Path("/test")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -37,6 +43,7 @@ public class HelloWorld {
         System.out.println("ready");
         return "Hello, World!";
     }
+
 
     @GET
     @Path("/users")
@@ -53,12 +60,7 @@ public class HelloWorld {
         return userResource.getUser(id);
     }
 
-    @PUT
-    @Path("/update")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void updateUser(User user) {
-        userResource.updateUser(user);
-    }
+
 
     @DELETE
     @Path("/delete/{id}")
@@ -69,4 +71,61 @@ public class HelloWorld {
             userResource.deleteUser(id);
         }
     }
+
+
+    @GET
+    @Path("/sexes")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Sex> getClichedMessage() {
+
+        return sexResource.getAllSex();
+    }
+
+    @GET
+    @Path("/sex/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Sex getClichedMessage(@PathParam("id") int id) {
+        return sexResource.getSex(id);
+    }
+
+    @PUT
+    @Path("/user/update")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void updateUser(User user) {
+        userResource.updateUser(user);
+    }
+
+    @PUT
+    @Path("/update")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void updateUser(Sex sex) {
+        sexResource.updateSex(sex);
+    }
+
+    @DELETE
+    @Path("/sex/delete/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void deleteUser(@PathParam("id") int id) {
+        //abfrage einbauen ob sex referenziert wird von user
+        Sex sex = sexResource.getSex(id);
+        if(sex.getId()!= 0){
+            sexResource.deleteSex(id);
+        }
+    }
+
+
+    @POST
+    @Path("/sex/create")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String getClichedMessage(Sex sex) {
+        sexResource.createSex(sex);
+        System.out.println("ready");
+        return "Hello, World!";
+    }
+
+
+    */
+
+
+
 }

@@ -1,7 +1,5 @@
 package Server.Pojo;
 
-import utils.Sex;
-
 public class User {
 
     public int getId()

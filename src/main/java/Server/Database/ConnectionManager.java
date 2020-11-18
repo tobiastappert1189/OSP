@@ -8,8 +8,11 @@ import java.sql.SQLException;
 
 
 public class ConnectionManager {
-    static String initialFillUser;
-    static String initialFillSex;
+    static String initialCreateUser;
+    static String initialCreateSex;
+
+    static String fillSex;
+
     static final String driverName = "com.mysql.jdbc.Driver";
     private static String username = "root";
     private static String password = "root";
@@ -18,14 +21,14 @@ public class ConnectionManager {
 
 
     public static Connection getConnection() {
-        initialFillSex = readFile("sql/createSex.sql");
-        initialFillUser = readFile("sql/createUser.sql");
+        initialCreateSex = readFile("sql/createSex.sql");
+        initialCreateUser = readFile("sql/createUser.sql");
         try {
             Class.forName(driverName);
             try {
                 con = DriverManager.getConnection(urlstring, username, password);
-                update(initialFillSex);
-                update(initialFillUser);
+                update(initialCreateSex);
+                update(initialCreateUser);
                 commit();
             } catch (SQLException ex) {
                 // log an exception. fro example:
