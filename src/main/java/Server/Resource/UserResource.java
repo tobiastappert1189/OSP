@@ -47,6 +47,20 @@ public class UserResource implements Server.Repository.UserRepository
         return user;
     }
 
+    public User getAuth(String benutzerName,String password){
+       List<User> users = getUsers();
+
+       for(User user:users)
+       {
+           if(user.getUserName().equals(benutzerName) && user.getPassword().equals(password)){
+               return user;
+       }
+
+        }
+
+        return null;
+    }
+
     @Override
     public User getUser(int id)
     {

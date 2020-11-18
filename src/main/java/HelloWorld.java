@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -12,10 +13,13 @@ import javax.ws.rs.core.MediaType;
 
 import Server.Database.ConnectionManager;
 import Server.Pojo.Sex;
+import Server.Pojo.WishedPerson;
+import Server.Pojo.Tour;
+import Server.Pojo.TourResponse;
 import Server.Pojo.User;
 import Server.Pojo.UserFromResponse;
-import Server.Pojo.WishedPerson;
 import Server.Resource.SexResource;
+import Server.Resource.TourResource;
 import Server.Resource.UserResource;
 import Server.Resource.WishedPersonResource;
 
@@ -25,6 +29,7 @@ public class HelloWorld {
     UserResource userResource = new UserResource();
     SexResource sexResource = new SexResource();
     WishedPersonResource wishedPersonResource = new WishedPersonResource();
+    TourResource tourResource = new TourResource();
 
 
     /*
@@ -162,14 +167,65 @@ public class HelloWorld {
     }
 
     @POST
+    @Path("/tour/create")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void geTour(TourResponse tourResponse) {
+        String wishedPersonString= tourResponse.getWishedPersonId();
+
+        WishedPerson wishedPerson = new WishedPerson();
+        wishedPerson.setDiscription(wishedPersonString);
+        int wishedPersonId = wishedPersonResource.createWishedPersonReturnInt(wishedPerson);
+
+        int id = tourResponse.getId();
+        int destinationPlz = tourResponse.getDestinationPlz();
+        int startPlz = tourResponse.getStartPlz();
+        LocalDateTime localDateTime = tourResponse.getDateTime();
+        boolean arriveDrive = tourResponse.isArriveDrive();
+        int hasSize = tourResponse.getSize();
+        boolean isSmoking = tourResponse.isSmoking();
+        boolean isAnimal = tourResponse.isAnimal();
+        boolean isLuggage = tourResponse.isLuggage();
+        String discription = tourResponse.getDiscription();
+
+
+
+        Tour tour = new Tour(id,destinationPlz,startPlz,localDateTime,hasSize,isSmoking,isAnimal,isLuggage,wishedPersonId,discription,arriveDrive);
+        tourResource.createTour(tour);
+    }
+
+
+
+
+    @POST
     @Path("/wishedPerson/create")
     @Consumes(MediaType.APPLICATION_JSON)
     public String getClichedMessage(WishedPerson wishedPerson) {
         wishedPersonResource.createWishedPerson(wishedPerson);
         System.out.println("ready");
+
         return "teeest";
     }
 
 
+    @GET
+    @Path("/tour/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Tour getClichedMessage(@PathParam("id") int id) {
+
+
+        User user = userResource.getAuth("AUTO","test");
+        System.out.println("teeest");
+
+        return tourResource.getTour(id);
+    }
+
+    @GET
+    @Path("/tour/{userName}/{password}")
+    public String getClichedMessage(@PathParam("userName") String userName,@PathParam("password") String password) {
+
+
+        User user = userResource.getAuth(userName,password);
+        return "sucessFull login";
+    }
 
 }

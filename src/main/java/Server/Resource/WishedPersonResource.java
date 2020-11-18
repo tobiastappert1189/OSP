@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Server.Database.ConnectionManager;
-import Server.Pojo.Sex;
 import Server.Pojo.WishedPerson;
 import Server.Repository.WishedPersonRepository;
 
@@ -49,7 +48,7 @@ public class WishedPersonResource implements WishedPersonRepository
     {
 
 
-        String sql = "insert into sex(DISCRIPTION) values (?)";
+        String sql = "insert into WISHEDPERSON(DISCRIPTION) values (?)";
         int test = 0;
         int last = 0;
         try
