@@ -32,22 +32,10 @@ public class HelloWorld {
     TourResource tourResource = new TourResource();
 
 
-    /*
-    @GET
-    @Produces("text/plain")
-    public String getClichedMessagee() {
-
-        ConnectionManager connectionManager = new ConnectionManager();
-        ConnectionManager.getConnection();
-        System.out.println("ready");
-        return "Hello, World!";
-    }
-
-
     @POST
-    @Path("/test")
+    @Path("/user/create")
     @Consumes(MediaType.APPLICATION_JSON)
-    public String getClichedMessage(User user) {
+    public String createUser(User user) {
         userResource.createUser(user);
         System.out.println("ready");
         return "Hello, World!";
@@ -55,26 +43,24 @@ public class HelloWorld {
 
 
     @GET
-    @Path("/users")
+    @Path("/allUser")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<User> getClichedMessage() {
+    public List<User> allUser() {
 
         return userResource.getUsers();
     }
 
     @GET
-    @Path("/users/{id}")
+    @Path("/getUsers/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public User getClichedMessage(@PathParam("id") int id) {
+    public User getUsers(@PathParam("id") int id) {
         return userResource.getUser(id);
     }
 
-
-
     @DELETE
-    @Path("/delete/{id}")
+    @Path("/deleteUser/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void deleteUser(@PathParam("id") int id) {
+    public void deleteUserWithId(@PathParam("id") int id) {
         User user = userResource.getUser(id);
         if(user.getId()!= 0){
             userResource.deleteUser(id);
@@ -83,7 +69,7 @@ public class HelloWorld {
 
 
     @GET
-    @Path("/sexes")
+    @Path("/getAllSex")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Sex> getClichedMessage() {
 
@@ -91,9 +77,9 @@ public class HelloWorld {
     }
 
     @GET
-    @Path("/sex/{id}")
+    @Path("/getSexId/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Sex getClichedMessage(@PathParam("id") int id) {
+    public Sex getSexId(@PathParam("id") int id) {
         return sexResource.getSex(id);
     }
 
@@ -105,7 +91,7 @@ public class HelloWorld {
     }
 
     @PUT
-    @Path("/update")
+    @Path("/sexUpdate")
     @Consumes(MediaType.APPLICATION_JSON)
     public void updateUser(Sex sex) {
         sexResource.updateSex(sex);
@@ -127,25 +113,13 @@ public class HelloWorld {
     @POST
     @Path("/sex/create")
     @Consumes(MediaType.APPLICATION_JSON)
-    public String getClichedMessage(Sex sex) {
+    public String sexCreate(Sex sex) {
         sexResource.createSex(sex);
         System.out.println("ready");
         return "Hello, World!";
     }
 
 
-
-    @POST
-    @Path("/sex/create")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public String getClichedMessage(Sex sex) {
-        sexResource.createSex(sex);
-        System.out.println("ready");
-        return "teeest";
-    }
-
-
-     */
     @POST
     @Path("/sex/create")
     @Consumes(MediaType.APPLICATION_JSON)
