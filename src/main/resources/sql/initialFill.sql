@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS User (
-    id int,
+    id int auto_increment,
     userName varchar(30),
     mail varchar(30),
     password varchar(30),

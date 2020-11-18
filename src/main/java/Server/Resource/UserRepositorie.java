@@ -7,6 +7,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mysql.cj.protocol.Resultset;
+
 import Server.Database.ConnectionManager;
 import Server.Pojo.User;
 
@@ -24,18 +26,21 @@ public class UserRepositorie implements Server.Repository.UserRepository
     @Override
     public User createUser(User user)
     {
-        String sql = "insert into user values (?,?,?,?,?)";
+        String sql = "insert into user(userName,mail,password,isManager) values (?,?,?,?)";
         try
-        {  PreparedStatement preparedStatement = ConnectionManager.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            PreparedStatement st = ConnectionManager.getConnection().prepareStatement(sql);
+                
+        {
+            PreparedStatement st = ConnectionManager.getConnection().prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
 
             // autoincrement id;
-            st.setInt(1, user.getId());
-            st.setString(2, user.getUserName());
-            st.setString(3, user.getMail());
-            st.setString(4, user.getPassword());
-            st.setBoolean(5, user.isManager());
+            st.setString(1, user.getUserName());
+            st.setString(2, user.getMail());
+            st.setString(3, user.getPassword());
+            st.setBoolean(4, user.isManager());
             st.executeUpdate();
+
+            ResultSet resultSet= st.getGeneratedKeys();
+            int key = resultSet.getInt(1);
         }
         catch (SQLException throwables)
         {
@@ -119,7 +124,7 @@ public class UserRepositorie implements Server.Repository.UserRepository
         }
     }
 
-    
+
 
 
 }
