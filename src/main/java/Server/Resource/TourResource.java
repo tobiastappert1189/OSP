@@ -9,7 +9,6 @@ import java.util.List;
 
 import Server.Database.ConnectionManager;
 import Server.Pojo.Tour;
-import Server.Pojo.User;
 
 public class TourResource implements Server.Repository.TourRepository
 {
@@ -25,7 +24,7 @@ public class TourResource implements Server.Repository.TourRepository
         @Override
         public Tour createTour(Tour tour)
         {
-            String sql = "insert into tour(destinationPlz,startPlz,dateTime,arriveDrive,hasSize,isSmoker,isAnimal,isLuggage,wishedPerson,discription) values (?,?,?,?,?,?,?,?,?,?)";
+            String sql = "insert into tour(destinationPlz,startPlz,dateTime,arriveDrive,hasSize,isSmoker,isAnimal,isLuggage,wishedPerson,discription,provider) values (?,?,?,?,?,?,?,?,?,?,?)";
             try
 
             {
@@ -41,6 +40,7 @@ public class TourResource implements Server.Repository.TourRepository
                 st.setBoolean(8, tour.isLuggage());
                 st.setInt(9,tour.getWishedPersonId());
                 st.setString(10,tour.getDiscription());
+                st.setInt(11,tour.getProvider());
 
                 st.executeUpdate();
 
@@ -76,6 +76,7 @@ public class TourResource implements Server.Repository.TourRepository
                     tour.setLuggage(rs.getBoolean(9));
                     tour.setWishedPersonId(rs.getInt(10));
                     tour.setDiscription(rs.getString(11));
+                    tour.setProvider(rs.getInt(12));
                 }
             }
             catch (SQLException throwables)
@@ -108,6 +109,7 @@ public class TourResource implements Server.Repository.TourRepository
                         tour.setLuggage(rs.getBoolean(9));
                         tour.setWishedPersonId(rs.getInt(10));
                         tour.setDiscription(rs.getString(11));
+                        tour.setProvider(rs.getInt(12));
 
                     tours.add(tour);
                 }
@@ -121,10 +123,19 @@ public class TourResource implements Server.Repository.TourRepository
             return tours;
         }
 
+        public void teilnehmen(int tourId){
+            Tour tour = getTour(tourId);
+            int oldplätze = tour.getSize();
+            int newPlätze = oldplätze -1;
+            tour.setSize(newPlätze);
+            updateTour(tour);
+            }
+
+
         @Override
         public void updateTour(Tour tour)
         {
-            String sql = "update user set destinationPlz=?,startPlz=?,dateTime=?,arriveDrive=?,hasSize=? ,isSmoker=?,isAnimal=?,isLuggage=? ,wishedPerson=?,discription=? where id=?";
+            String sql = "update tour set destinationPlz=?,startPlz=?,dateTime=?,arriveDrive=?,hasSize=? ,isSmoker=?,isAnimal=?,isLuggage=? ,wishedPerson=?,discription=?,provider=? where id=?";
             try{
                 PreparedStatement st = ConnectionManager.getConnection().prepareStatement(sql);
                 st.setInt(1,tour.getDestinationPlz());
@@ -137,7 +148,8 @@ public class TourResource implements Server.Repository.TourRepository
                 st.setBoolean(8,tour.isLuggage());
                 st.setInt(9,tour.getWishedPersonId());
                 st.setString(10,tour.getDiscription());
-                st.setInt(11,tour.getId());
+                st.setInt(11,tour.getProvider());
+                st.setInt(12,tour.getId());
                 st.executeUpdate();
             }
             catch (SQLException throwables)

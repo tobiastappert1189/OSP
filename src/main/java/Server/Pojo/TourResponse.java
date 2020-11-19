@@ -1,12 +1,11 @@
 package Server.Pojo;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class TourResponse
 {
 
-    public TourResponse(int id, int destinationPlz, int startPlz, LocalDateTime dateTime, int cost, int size, boolean isSmoking, boolean isAnimal, boolean isLuggage, String wishedPersonId, String discription, boolean arriveDrive)
+    public TourResponse(int id, int destinationPlz, int startPlz, LocalDateTime dateTime, int cost, int size, boolean isSmoking, boolean isAnimal, boolean isLuggage, String wishedPersonId, String discription, boolean arriveDrive,int provider)
     {
         this.id = id;
         this.destinationPlz = destinationPlz;
@@ -20,6 +19,7 @@ public class TourResponse
         this.wishedPersonId = wishedPersonId;
         this.discription = discription;
         this.arriveDrive = arriveDrive;
+        this.provider = provider;
     }
 
 
@@ -150,6 +150,17 @@ public class TourResponse
     int destinationPlz;
     int startPlz;
 
+    public int getProvider()
+    {
+        return provider;
+    }
+
+    public void setProvider(int provider)
+    {
+        this.provider = provider;
+    }
+
+    int provider;
     public boolean isArriveDrive()
     {
         return arriveDrive;

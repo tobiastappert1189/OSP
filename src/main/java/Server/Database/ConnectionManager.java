@@ -10,6 +10,8 @@ import java.sql.SQLException;
 public class ConnectionManager {
     static String initialCreateUser;
     static String initialCreateSex;
+    static String initialWishedPerson;
+    static String initTour;
 
     static String fillSex;
 
@@ -23,12 +25,17 @@ public class ConnectionManager {
     public static Connection getConnection() {
         initialCreateSex = readFile("sql/createSex.sql");
         initialCreateUser = readFile("sql/createUser.sql");
+        initialWishedPerson =  readFile("sql/CreateWishedPerson.sql");
+        initTour = readFile("sql/Tour.sql");
+
         try {
             Class.forName(driverName);
             try {
                 con = DriverManager.getConnection(urlstring, username, password);
                 update(initialCreateSex);
+                update(initialWishedPerson);
                 update(initialCreateUser);
+                update(initTour);
                 commit();
             } catch (SQLException ex) {
                 // log an exception. fro example:

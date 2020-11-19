@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 public class Tour
 {
 
-    public Tour(int id, int destinationPlz, int startPlz, LocalDateTime dateTime, int size, boolean isSmoking, boolean isAnimal, boolean isLuggage, int wishedPersonId, String discription, boolean arriveDrive)
+    public Tour(int id, int destinationPlz, int startPlz, LocalDateTime dateTime, int size, boolean isSmoking, boolean isAnimal, boolean isLuggage, int wishedPersonId, String discription, boolean arriveDrive,int provider)
     {
         this.id = id;
         this.destinationPlz = destinationPlz;
@@ -21,6 +21,8 @@ public class Tour
         this.wishedPersonId = wishedPersonId;
         this.discription = discription;
         this.arriveDrive = arriveDrive;
+        this.provider = provider;
+
     }
 
     int cost;
@@ -149,6 +151,18 @@ public class Tour
     int id;
     int destinationPlz;
     int startPlz;
+
+    public int getProvider()
+    {
+        return provider;
+    }
+
+    public void setProvider(int provider)
+    {
+        this.provider = provider;
+    }
+
+    int provider;
 
     public boolean isArriveDrive()
     {

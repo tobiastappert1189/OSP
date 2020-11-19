@@ -1,16 +1,40 @@
-Server/Database/ConnectionManager.java
- Server.Database.ConnectionManager
+Server/Resource/WishedPersonResource.java
+ Server.Resource.WishedPersonResource
+Server/Repository/SexRepository.java
+ Server.Repository.SexRepository
 utils/FileUtil.java
  utils.FileUtil
-Server/Resource/UserResource.java
- Server.Resource.UserResource
-utils/sex.java
- utils.sex
-Server/Pojo/User.java
- Server.Pojo.User
+UserService.java
+ UserService
+Server/Repository/WishedPersonRepository.java
+ Server.Repository.WishedPersonRepository
+Server/Resource/TourResource.java
+ Server.Resource.TourResource
+Server/Pojo/Tour.java
+ Server.Pojo.Tour
 Server/Repository/UserRepository.java
  Server.Repository.UserRepository
-HelloWorld.java
- HelloWorld
+Server/Repository/TourRepository.java
+ Server.Repository.TourRepository
+Server/Pojo/User.java
+ Server.Pojo.User
+Server/Resource/SexResource.java
+ Server.Resource.SexResource
+Server/Pojo/Sex.java
+ Server.Pojo.Sex
+Server/Pojo/UserFromResponse.java
+ Server.Pojo.UserFromResponse
+Server/Database/ConnectionManager.java
+ Server.Database.ConnectionManager
+Server/Resource/UserResource.java
+ Server.Resource.UserResource
+Server/Pojo/WishedPerson.java
+ Server.Pojo.WishedPerson
+Server/Pojo/TourResponse.java
+ Server.Pojo.TourResponse
+TourService.java
+ TourService
+ServerConnectedService.java
+ ServerConnectedService
 MyApplication.java
  MyApplication

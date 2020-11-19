@@ -20,12 +20,12 @@ public class UserFromResponse
         String password;
         boolean isManager;
 
-        public String getSexx()
+        public String getSex()
         {
             return sex;
         }
 
-        public void setSex(String sexx)
+        public void setSex(String sex)
         {
             this.sex = sex;
         }
