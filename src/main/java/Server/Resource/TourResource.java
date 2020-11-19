@@ -90,7 +90,7 @@ public class TourResource implements Server.Repository.TourRepository
         public List<Tour> getTours()
         {
             List<Tour> tours = new ArrayList<>();
-            String sql = "select * from tour";
+            String sql = "select * from tour where hasSize > 0";
 
             try {
                 Statement st = ConnectionManager.getConnection().createStatement();
@@ -125,10 +125,18 @@ public class TourResource implements Server.Repository.TourRepository
 
         public void teilnehmen(int tourId){
             Tour tour = getTour(tourId);
-            int oldplätze = tour.getSize();
-            int newPlätze = oldplätze -1;
-            tour.setSize(newPlätze);
-            updateTour(tour);
+
+            if(tour.getSize() > 0)
+            {
+
+                int oldplätze = tour.getSize();
+                int newPlätze = oldplätze - 1;
+                tour.setSize(newPlätze);
+                updateTour(tour);
+            }
+
+            System.out.println("falsch!");
+
             }
 
 
