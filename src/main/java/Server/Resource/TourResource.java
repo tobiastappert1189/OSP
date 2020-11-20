@@ -168,7 +168,7 @@ public class TourResource implements Server.Repository.TourRepository
 
         @Override
         public void deleteTour(int id) {
-            String sql = "delete from user where tour="+id;
+            String sql = "delete from tour where tour="+id;
 
             try {
                 PreparedStatement st = ConnectionManager.getConnection().prepareStatement(sql);

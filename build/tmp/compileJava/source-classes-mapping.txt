@@ -8,8 +8,8 @@ UserService.java
  UserService
 Server/Repository/WishedPersonRepository.java
  Server.Repository.WishedPersonRepository
-Server/Resource/TourResource.java
- Server.Resource.TourResource
+ServerConnectedService.java
+ ServerConnectedService
 Server/Pojo/Tour.java
  Server.Pojo.Tour
 Server/Repository/UserRepository.java
@@ -32,9 +32,9 @@ Server/Pojo/WishedPerson.java
  Server.Pojo.WishedPerson
 Server/Pojo/TourResponse.java
  Server.Pojo.TourResponse
-TourService.java
- TourService
-ServerConnectedService.java
- ServerConnectedService
 MyApplication.java
  MyApplication
+TourService.java
+ TourService
+Server/Resource/TourResource.java
+ Server.Resource.TourResource
